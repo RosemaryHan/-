@@ -58,7 +58,7 @@ public class NO2_ExcavatorCompetition {
     }
 
     //第三个测试点超时
-    public static void main(String[] args) {
+    public static void main_2(String[] args) {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String s = br.readLine();
@@ -92,5 +92,26 @@ public class NO2_ExcavatorCompetition {
             System.out.println(e.getMessage());
             System.out.println("1");
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String s = br.readLine();
+        int n = Integer.parseInt(s);
+        int step = 1;
+        int maxScroe = -1;
+        int[] schools = new int[n + 2];
+        for (int i = 1; i <= n; i++) {
+            String sco = br.readLine();
+            String[] scos = sco.split(" ");
+            schools[Integer.parseInt(scos[0])] = schools[Integer.parseInt(scos[0])] + Integer.parseInt(scos[1]);
+        }
+        for(int i = 1; i <= n; i++){
+            if(schools[i]>maxScroe){
+                maxScroe= schools[i];
+                step=i;
+            }
+        }
+        System.out.println(step+" "+schools[step]);
     }
 }
