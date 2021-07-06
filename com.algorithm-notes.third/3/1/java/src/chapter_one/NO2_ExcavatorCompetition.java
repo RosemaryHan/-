@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.StreamTokenizer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -90,7 +89,7 @@ public class NO2_ExcavatorCompetition {
             System.out.println(max + " " + theSchools.get(max));
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("1");
+            System.out.println("");
         }
     }
 
