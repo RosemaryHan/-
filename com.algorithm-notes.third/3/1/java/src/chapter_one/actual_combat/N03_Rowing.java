@@ -90,7 +90,7 @@ public class N03_Rowing {
         System.out.println(timesOfA+" "+timesOfB);
     }
 
-    //结果如下： 部分正确 内存： 16172 KB    耗时：164
+    //结果如下： ac 内存： 16172 KB    耗时：164
     public static void main(String[] args) {
         int timesOfA = 0;
         int timesOfB = 0;
