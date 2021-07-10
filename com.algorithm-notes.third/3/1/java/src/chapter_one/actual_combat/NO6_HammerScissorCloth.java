@@ -43,6 +43,7 @@ public class NO6_HammerScissorCloth {
     final static String JString = "J";
     final static String BString = "B";
 
+    //多种错误，运行超时
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
@@ -102,6 +103,14 @@ public class NO6_HammerScissorCloth {
             res = "C ";
         } else if (aOfJTimes > aOfBTimes && aOfJTimes > aOfCTimes) {
             res = "J ";
+        } else {//有不同的解
+            if (aOfJTimes == aOfCTimes) {
+                res = "C ";
+            } else if (aOfJTimes == aOfBTimes) {
+                res = "B ";
+            } else if (aOfCTimes == aOfBTimes) {
+                res = "B ";
+            }
         }
         if (bOfBTimes > bOfJTimes && bOfBTimes > bOfCTimes) {
             res = res + "B";
@@ -109,6 +118,14 @@ public class NO6_HammerScissorCloth {
             res = res + "C";
         } else if (bOfJTimes > bOfBTimes && bOfJTimes > bOfCTimes) {
             res = res + "J";
+        } else {//有不同的解
+            if (bOfJTimes == bOfCTimes) {
+                res = res + "C";
+            } else if (bOfJTimes == bOfBTimes) {
+                res = res + "B";
+            } else if (bOfCTimes == bOfBTimes) {
+                res = res + "B";
+            }
         }
         System.out.println(res);
     }
