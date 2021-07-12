@@ -44,7 +44,7 @@ public class NO6_HammerScissorCloth {
     final static String BString = "B";
 
     //多种错误，运行超时
-    public static void main(String[] args) {
+    public static void main_1(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         //a
