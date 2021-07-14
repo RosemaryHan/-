@@ -65,11 +65,15 @@ import java.util.Scanner;
  * @date 2021/07/12 23:49:22
  */
 public class NO7_ShufflingMachine {
-    public static void main(String[] args) {
+    //结果如下： 全部正确 内存： 15256KB    耗时： 177 ms
+    public static void main_1(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int k = scanner.nextInt();
-        String[] cards = new String[55];
-        int[] rules = new int[55];
+        String s = scanner.nextLine();
+        int k = Integer.parseInt(s);
+        int totalNumbers = 54;
+        String[] cards = new String[54];
+        int[] start = new int[55];
+        int[] end = new int[55];
         //获取到牌组
         for (int i = 0; i < 52; i++) {
             if (i < 13 && i >= 0) {
@@ -85,18 +89,44 @@ public class NO7_ShufflingMachine {
                 cards[i] = "D" + (((i) % 13) + 1);
             }
         }
-        cards[53] = "J1";
-        cards[54] = "J2";
-
+        cards[52] = "J1";
+        cards[53] = "J2";
+        for (int i = 1; i <= totalNumbers; i++) {
+            start[i - 1] = i;
+        }
         //循环获取规则
-        for (int i = 0; i < 54; i++) {
-            rules[i] = scanner.nextInt();
+        String theRule = scanner.nextLine();
+        String[] theRuleSplit = theRule.split(" ");
+
+        //把对应符号交换
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < theRuleSplit.length; j++) {
+                //获取编码值
+                int now = Integer.parseInt(theRuleSplit[j]);
+                //下标要减一
+                end[now - 1] = start[j];
+            }
+            //节省循环开销
+            if (i < theRuleSplit.length) {
+                for (int j = 0; j < start.length; j++) {
+                    start[j] = end[j];
+                }
+            }
+        }
+
+        //输入对应规则的洗牌
+        for (int i = 0; i < totalNumbers; i++) {
+            if (i > 0 && i < totalNumbers) {
+                System.out.print(" ");
+            }
+            int i1 = end[i];
+            System.out.print(cards[i1 - 1]);
         }
     }
-
+    //结果如下： 全部正确 内存： 13580 KB    耗时： 106 ms
     public static void main_2(String[] args) throws IOException {
         int n = 54;
-        char[] ch = { 'S', 'H', 'C', 'D' };
+        char[] ch = {'S', 'H', 'C', 'D'};
         ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < 4; i++) {
             for (int j = 1; j <= 13; j++) {
@@ -114,6 +144,7 @@ public class NO7_ShufflingMachine {
         int k = Integer.parseInt(br.readLine());
         String[] s = br.readLine().split(" ");
         int[] num = new int[60];
+        //获取规则
         for (int i = 0; i < n; i++) {
             num[i] = Integer.parseInt(s[i]);
         }
@@ -123,10 +154,13 @@ public class NO7_ShufflingMachine {
             start[i] = i;
         }
 
+        //反转次数
         for (int i = 0; i < k; i++) {
+            //获得数值
             for (int j = 0; j < n; j++) {
                 end[num[j] - 1] = start[j];
             }
+            //颠倒值
             for (int j = 0; j < n; j++) {
                 start[j] = end[j];
             }
@@ -140,5 +174,58 @@ public class NO7_ShufflingMachine {
 
         }
         System.out.println();
+    }
+
+    //结果如下： 全部正确 内存： 15576 KB    耗时： 211 ms
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
+        int k = Integer.parseInt(s);
+        int totalNumbers = 54;
+        int[] start = new int[55];
+        int[] end = new int[55];
+        for (int i = 1; i <= totalNumbers; i++) {
+            start[i - 1] = i;
+        }
+        //循环获取规则
+        String theRule = scanner.nextLine();
+        String[] theRuleSplit = theRule.split(" ");
+
+        //把对应符号交换
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < theRuleSplit.length; j++) {
+                //获取编码值
+                int now = Integer.parseInt(theRuleSplit[j]);
+                //下标要减一
+                end[now - 1] = start[j];
+            }
+            //节省循环开销
+            if (i < theRuleSplit.length) {
+                for (int j = 0; j < start.length; j++) {
+                    start[j] = end[j];
+                }
+            }
+        }
+
+        //输入对应规则的洗牌
+        for (int i = 0; i < totalNumbers; i++) {
+            if (i > 0 && i < totalNumbers) {
+                System.out.print(" ");
+            }
+            int i1 = end[i];
+            int i2 = i1 - 1;
+            int number = (i2 % 13) + 1;
+            if (i2 / 13 == 0) {
+                System.out.print("S" + number);
+            } else if (i2 / 13 == 1) {
+                System.out.print("H" + number);
+            } else if (i2 / 13 == 2) {
+                System.out.print("C" + number);
+            } else if (i2 / 13 == 3) {
+                System.out.print("D" + number);
+            } else if (i2 / 13 == 4) {
+                System.out.print("J" + number);
+            }
+        }
     }
 }
