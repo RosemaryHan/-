@@ -70,5 +70,5 @@ public class NO_1_TwoNumbersPlus {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String s = bufferedReader.readLine();
 
-    }
+  }
 }
